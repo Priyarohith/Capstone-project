@@ -1,0 +1,64 @@
+--- SELECT/WHERE + ORDER BY + LIMIT ---
+SELECT * FROM books WHERE in_stock = 1 ORDER BY rating DESC LIMIT 10;
+
+ book_id                                 title  price_gbp  price_inr  rating  in_stock  category_id
+       5          Sapiens: A Brief History ...      54.23   5721.265       5         1            1
+      13                           Set Me Free      17.46   1842.030       5         1            1
+      14   Scott Pilgrim's Precious Little ...      52.29   5516.595       5         1            1
+      15                     Rip it Up and ...      35.02   3694.610       5         1            1
+      24            Chase Me (Paris Nights ...      25.27   2665.985       5         1            1
+      25                            Black Dust      34.53   3642.915       5         1            1
+      29 Worlds Elsewhere: Journeys Around ...      40.30   4251.650       5         1            1
+      31            The Four Agreements: A ...      17.66   1863.130       5         1            1
+      33                     The Elephant Tree      23.82   2513.010       5         1            1
+      35                        Sophie's World      15.94   1681.670       5         1            1
+
+--- ORDER BY + LIMIT ---
+SELECT title, price_gbp, price_inr FROM books ORDER BY price_gbp DESC LIMIT 10;
+
+                              title  price_gbp  price_inr
+       Slow States of Collapse: ...      57.31   6046.205
+              Our Band Could Be ...      57.25   6039.875
+                The Past Never Ends      56.50   5960.750
+       The Pioneer Woman Cooks: ...      56.41   5951.255
+      The Secret of Dreadwillow ...      56.13   5921.715
+           Birdsong: A Story in ...      54.64   5764.520
+       Sapiens: A Brief History ...      54.23   5721.265
+                 Tipping the Velvet      53.74   5669.570
+      Aladdin and His Wonderful ...      53.13   5605.215
+Scott Pilgrim's Precious Little ...      52.29   5516.595
+
+--- DISTINCT ---
+SELECT DISTINCT category_id FROM books;
+
+ category_id
+           1
+
+--- BETWEEN ---
+SELECT title, price_inr FROM books WHERE price_inr BETWEEN 400 AND 800 ORDER BY price_inr DESC;
+
+Empty DataFrame
+Columns: [title, price_inr]
+Index: []
+
+--- JOIN + GROUP BY ---
+SELECT c.category_name, COUNT(b.book_id) AS book_count FROM books b JOIN categories c ON b.category_id = c.category_id GROUP BY c.category_name ORDER BY book_count DESC;
+
+category_name  book_count
+ all_products          60
+
+--- IN ---
+SELECT title, rating FROM books WHERE rating IN (4, 5) ORDER BY rating DESC LIMIT 10;
+
+                                title  rating
+         Sapiens: A Brief History ...       5
+                          Set Me Free       5
+  Scott Pilgrim's Precious Little ...       5
+                    Rip it Up and ...       5
+           Chase Me (Paris Nights ...       5
+                           Black Dust       5
+Worlds Elsewhere: Journeys Around ...       5
+           The Four Agreements: A ...       5
+                    The Elephant Tree       5
+                       Sophie's World       5
+

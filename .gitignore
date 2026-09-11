@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+.env
+*.sqlite3
+*.db
+*.png
+*.csv
+!analytics/titanic.csv
+!data_pipeline/zepto_books.db
+!analytics/best_pipeline.joblib
+!support_assistant/chroma_db/
+.DS_Store
