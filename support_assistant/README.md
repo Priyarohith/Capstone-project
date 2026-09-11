@@ -7,7 +7,7 @@ This module builds a grounded Zepto policy assistant using a ChromaDB-backed ret
 The full retrieval pipeline runs in the order ingestion → embedding → retrieval → generation.
 
 - Ingestion: the document corpus is stored as plain text files in [support_assistant/docs](docs). The load step runs in [support_assistant/main.py](main.py) via the ingest_documents function.
-- Embedding: each document is embedded locally using the SentenceTransformer model all-MiniLM-L6-v2. These vector embeddings are saved in the persistent Chroma collection named zepto_policy_collection.
+- Embedding: each document is embedded using the SentenceTransformer model all-MiniLM-L6-v2. On first run, main.py downloads the model from Hugging Face into the local hf_all_mini cache; later runs reuse that cache. The resulting vectors are saved in the persistent Chroma collection named zepto_policy_collection.
 - Retrieval: the classify_intent node decides whether a query is a policy_question or general_question. The policy route then calls the retrieve_and_answer node, which queries ChromaDB for the top three similar chunks.
 - Generation: in mock mode, the final answer is produced by the retrieve_and_answer or direct_answer node using a canned response template. In the optional MOCK_LLM=0 path, the real LLM branch would use the structured prompt template and retrieved context instead.
 

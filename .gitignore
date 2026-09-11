@@ -10,7 +10,10 @@ venv/
 *.png
 *.csv
 !analytics/titanic.csv
+!analytics/plots/
+!analytics/plots/*.png
 !data_pipeline/zepto_books.db
 !analytics/best_pipeline.joblib
-!support_assistant/chroma_db/
+support_assistant/chroma_db/
+support_assistant/hf_all_mini/
 .DS_Store
