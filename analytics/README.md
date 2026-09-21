@@ -128,9 +128,26 @@ The residual plot shows a non-random spread, which indicates some heteroscedasti
 
 ## Model comparison and recommendation
 
-The classification metrics (accuracy, precision, recall, F1, AUC) for the three classifiers are reported in a separate table from the regression metrics (MAE, RMSE, R², Adjusted R²). They are intentionally kept in separate metric groups because classification and regression are on different scales.
+The classification metrics (accuracy, precision, recall, F1, AUC) for the three classifiers are reported in the table below, while the regression metrics (MAE, RMSE, R², Adjusted R²) are kept separate because classification and regression are on different scales.
 
-I would deploy the best-performing classifier based on the final comparison table, typically the Random Forest or Logistic Regression depending on the exact run output, because it offers the strongest balance of precision, recall, and AUC for the survival task. In deployment settings, the model with the highest F1 and AUC is the best choice because it maximizes real predictive utility while keeping false positives and false negatives under control.
+### Classification comparison
+
+| Model | Accuracy | Precision | Recall | F1 | AUC |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Logistic Regression | 0.808989 | 0.783333 | 0.691176 | 0.734375 | 0.860963 |
+| Decision Tree | 0.808989 | 0.814815 | 0.647059 | 0.721311 | 0.856016 |
+| Random Forest | 0.831461 | 0.865385 | 0.661765 | 0.750000 | 0.838904 |
+
+### Regression comparison
+
+| Metric | Linear Regression |
+| --- | ---: |
+| MAE | 21.138552 |
+| RMSE | 41.746502 |
+| R² | 0.346774 |
+| Adjusted R² | 0.299267 |
+
+I would deploy the Random Forest model because it achieved the highest F1 score in the verified run and retained a strong balance of precision, recall, and AUC for the survival task. In deployment settings, the model with the highest F1 and competitive AUC is typically the best choice because it maximizes predictive utility while keeping false positives and false negatives under control.
 
 ## Saved pipeline
 
